@@ -1,4 +1,4 @@
-# presence_app
+# Flutter Presence App
 
 A new Flutter project.
 
