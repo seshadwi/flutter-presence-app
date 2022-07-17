@@ -34,10 +34,10 @@ class LoginController extends GetxController {
         if (e.code == 'user-not-found') {
           Get.snackbar("Terjadi kesalahan", "No user found for that email.");
         } else if (e.code == 'wrong-password') {
-          Get.snackbar("Error", "Wrong password provided for that user.");
+          Get.snackbar("Terjadi kesalahan", "Password salah.");
         }
       } catch (e) {
-        Get.snackbar("Error", "Tidak dapat login.");
+        Get.snackbar("Terjadi kesalahan", "Tidak dapat login.");
       }
     } else {
       Get.snackbar("Terjadi kesalahan", "Email dan Password harus diisi.");

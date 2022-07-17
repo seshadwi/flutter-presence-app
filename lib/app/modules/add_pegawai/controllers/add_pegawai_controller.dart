@@ -32,6 +32,8 @@ class AddPegawaiController extends GetxController {
             "uid": uid,
             "createdAt": DateTime.now().toIso8601String(),
           });
+
+          await userCredential.user!.sendEmailVerification();
         }
 
         print(userCredential);
