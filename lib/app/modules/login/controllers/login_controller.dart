@@ -21,12 +21,35 @@ class LoginController extends GetxController {
 
         if (userCredential.user != null) {
           if (userCredential.user!.emailVerified == true) {
-            Get.offAllNamed(Routes.HOME);
+            if (passwordC.text == "password") {
+              Get.offAllNamed(Routes.NEW_PASSWORD);
+            } else {
+              Get.offAllNamed(Routes.HOME);
+            }
           } else {
             Get.defaultDialog(
               title: "Belum Verifikasi",
               middleText:
                   "Akun ini belum diverifikasi. Lakukan verifikasi terlebih dahulu diemail.",
+              actions: [
+                OutlinedButton(
+                  onPressed: () => Get.back(),
+                  child: Text("CANCEL"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    try {
+                      await userCredential.user!.sendEmailVerification();
+                      Get.back();
+                      Get.snackbar("Berhasil", "Kode verifikasi terkirim");
+                    } catch (e) {
+                      Get.snackbar("Terjadi Kesalahan",
+                          "Tidak dapat mengirim email verifikasi. Hubungi admin atau cs.");
+                    }
+                  },
+                  child: Text("KIRIM ULANG"),
+                ),
+              ],
             );
           }
         }
